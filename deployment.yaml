@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: markov-app-service
+spec:
+  selector:
+    app: markov-app
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: markov-app
+spec:
+  selector:
+    matchLabels:
+      app: markov-app
+  template:
+    metadata:
+      labels:
+        app: markov-app
+    spec:
+      containers:
+        - name: markov-service
+          image: docker.io/a1839055/markov-service
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
