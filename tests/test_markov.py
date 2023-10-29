@@ -30,8 +30,6 @@ def test_train(client):
 
     model = response.json["model"]
 
-    print(model)
-
     assert model["cat"]["is"] == 2
     assert model["is"]["big"] == 1
     assert model["is"]["orange"] == 1
